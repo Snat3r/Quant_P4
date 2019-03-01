@@ -2,13 +2,14 @@
 #    Created By: #
 #     Alex       #
 #    Berkout     #
-# AND            #
+#      AND       #
 #     Coen       #
-#   van der      #
+#    van der     #
 #     Geest      #
 ##################
 
 library(tidyverse)
+library(lubridate)
 
 # Load csv file into R/ change directory if necessary
 QP4 = read.csv('D://Quant_Data/google_play_data.csv', stringsAsFactors = FALSE, sep = ";")
@@ -27,5 +28,12 @@ QP4$intalls = sub('[+]', '', QP4$intalls)
 #Remove dollar sign at the beginning of price column
 QP4$price = sub('[$]', '', QP4$price)
 
+#Remove 'M' at the end of file size (9.9M) to (9.9)
+QP4$file_size = sub('[M]', '', QP4$file_size)
+
 #replaces 'varies with device' in the file_sice and app_version to NA
 QP4[QP4 == 'Varies with device'] <- NA
+
+#convert last updated into date variable
+QP4$last_updated = as.Date(mdy(QP4$last_updated))
+
