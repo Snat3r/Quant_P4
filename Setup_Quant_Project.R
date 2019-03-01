@@ -60,3 +60,16 @@ QP4$last_updated = as.Date(mdy(QP4$last_updated))
 QP4$category = as.factor(QP4$category)
 QP4 = cbind(QP4, dummy(QP4$category, sep = "_"))
 colnames(QP4) <- gsub("QP4_", "cat_", fixed = TRUE, colnames(QP4))
+
+#Create new subset with permissions 
+Permissions <- c("permissions")
+PERM_QP4 <- QP4[Permissions]
+
+#Create new variable representing permission and extract found permission
+PERM_QP4$read_sensitive_log_data <- str_extract(PERM_QP4$permissions, "read sensitive log data")
+
+#Transform found permission in '1'
+PERM_QP4[PERM_QP4 == "read sensitive log data"] <- 1
+
+#transform 'Na' into '0'
+PERM_QP4$read_sensitive_log_data[is.na(PERM_QP4$read_sensitive_log_data)] <- 0 
