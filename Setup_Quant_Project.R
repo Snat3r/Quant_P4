@@ -29,9 +29,24 @@ QP4$intalls = sub('[+]', '', QP4$intalls)
 #Remove dollar sign at the beginning of price column
 QP4$price = sub('[$]', '', QP4$price)
 
-#Remove 'M' and 'k' at the end of file size (9.9M) to (9.9)
-QP4$file_size = sub('[M]', '', QP4$file_size)
+# remove 'varies with device' from file_sce column
+## Remove 'k' at the end of file size (400k) to (400)
+### subset values in filesize which contain M and then remove the m from the subset
+QP4[QP4 == 'Varies with device'] <- NA
 QP4$file_size = sub('[k]', '', QP4$file_size)
+QP4_m = QP4[grepl("M", QP4[["file_size"]]), ]
+#remove m add the end of value
+QP4_m$file_size = sub('[M]', '', QP4_m$file_size)
+#change column type to numerical before multiplication
+QP4_m$file_size = as.numeric(QP4_m$file_size)
+#Multiply the values in Filesize
+QP4_m$file_size = QP4_m$file_size * 1000
+#Remove M at the end of an value in main df
+QP4$file_size = sub('[M]', '', QP4$file_size)
+# change the column type in the main df (QP4) to numerical before joining with subset
+QP4$file_size = as.numeric(QP4$file_size)
+#join df based on ID and overwriting the values in QP4 with the values of QP4_m when not matching
+QP4 = anti_join(QP4, QP4_m, by = "id") %>% bind_rows(QP4_m)
 
 #replaces 'varies with device' in the file_size and app_version to NA And change NaN in Rating to NA
 QP4[QP4 == 'Varies with device'] <- NA
