@@ -71,5 +71,5 @@ PERM_QP4$read_sensitive_log_data <- str_extract(PERM_QP4$permissions, "read sens
 #Transform found permission in '1'
 PERM_QP4[PERM_QP4 == "read sensitive log data"] <- 1
 
-#transform 'Na' into '0'
-PERM_QP4$read_sensitive_log_data[is.na(PERM_QP4$read_sensitive_log_data)] <- 0 
+#Transform all 'Na' into '0'
+PERM_QP4[is.na(PERM_QP4)] <- 0 
