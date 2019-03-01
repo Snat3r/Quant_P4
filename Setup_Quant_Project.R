@@ -10,6 +10,7 @@
 
 library(tidyverse)
 library(lubridate)
+library(dummies)
 
 # Load csv file into R/ change directory if necessary
 QP4 = read.csv('D://Quant_Data/google_play_data.csv', stringsAsFactors = FALSE, sep = ";")
@@ -38,3 +39,10 @@ QP4$rating[QP4$rating == 'NaN'] <- NA
 
 #convert last updated into date variable
 QP4$last_updated = as.Date(mdy(QP4$last_updated))
+
+#change category into a factor
+## based on the factor create new columns with a 0 or 1
+### rename the columns
+QP4$category = as.factor(QP4$category)
+QP4 = cbind(QP4, dummy(QP4$category, sep = "_"))
+colnames(QP4) <- gsub("QP4_", "cat_", fixed = TRUE, colnames(QP4))
