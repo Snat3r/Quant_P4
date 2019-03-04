@@ -1,12 +1,14 @@
-##################
-#    Created By: #
-#     Alex       #
-#    Berkout     #
-# AND            #
-#     Coen       #
-#   van der      #
-#     Geest      #
-##################
+#################
+#  VU AMSTERDAM #
+#               #
+#  Created By:  #
+#     Alex      #
+#    Berkout    #
+# AND           #
+#     Coen      #
+#   van der     #
+#     Geest     #
+#################
 
 library(tidyverse)
 library(lubridate)
