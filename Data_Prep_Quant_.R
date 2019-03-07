@@ -67,7 +67,7 @@ QP4 = cbind(QP4, dummy(QP4$category, sep = "_"))
 colnames(QP4) <- gsub("QP4_", "cat_", fixed = TRUE, colnames(QP4))
 
 #Create new subset with permissions 
-Permissions <- c("permissions")
+Permissions <- c("permissions", "id")
 PERM_QP4 <- QP4[Permissions]
 
 #Create new variable representing permission and extract found permission
@@ -422,3 +422,6 @@ PERM_QP4$permissions <- NULL
 
 #save permissions subset as CSV
 write.csv(PERM_QP4, file = "PERM_QP4_FILTERED_NUMERIC.csv")
+
+#merge QP4 with PERM_QP4 by ID
+QP4 <- merge(QP4, PERM_QP4, by = "id")
