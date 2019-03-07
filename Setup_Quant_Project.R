@@ -10,6 +10,27 @@
 #     Geest     #
 #################
 
+                                                                    `                               
+                                                                  ./s:                              
+                                                                `/ss/:`                             
+                                                               -oosoo-              ``              
+          :ssss+             +ss/  `sssso         -ssss       /o+ssso.         `.:+oo+:::-`         
+          .mMMMM+           +MMN-  `MMMMN`        /MMMN      :s/ssss-       `-+osssssso/``          
+           :NMMMN-         -NMM+   `MMMMN`        /MMMN     `s/sssss-    `:+oo+oosso+:.`            
+            +MMMMm`       `mMMy    `MMMMN`        /MMMN     :sososs:`  ./oo+osssso+::.              
+             yMMMMy       yMMm`    `MMMMN`        /MMMN     +sssosso--+soosssso++//::               
+             `mMMMMo     +MMN-     `MMMMN`        /MMMN     +ss/++o++sssssssssso:..`                
+              -NMMMN:   -NMM+      `MMMMN`        /MMMN     :so` /osssooosso/:--`                   
+               +MMMMN. `mMMy       `MMMMN`        /MMMN     `o.`-s+++-./:::`                        
+                yMMMMh`yMMm`       `MMMMN.        +MMMN      .`://:/+++/.::.-`                      
+                `dMMMMdMMN:         hMMMMo       `dMMMy       :ossssosss+-..-`                      
+                 -NMMMMMMo          .dMMMMh/:--:+dMMMd.       :s+s/`.s/+o-```                       
+                  /MMMMMh            `/hNMMMNNNNMMNh/`       ./-`-o`./-.::                          
+                   .----`               `-:/+o++/-`          ``  `` `` ``                           
+                                                                                                    
+                                                                                                    
+ 
+
 #this code is free the use under the condition to attribute the original authors by refering the following:
 #Berkhout, A.T., & van de Geest, C. (2019) R Google Play Store Permissons Extractor, version 1.0, R Script, https://github.com/Snat3r/Quant_P4
 
