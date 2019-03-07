@@ -241,11 +241,11 @@ PERM_QP4[PERM_QP4 == "write to your social stream"] <- as.numeric(1)
 PERM_QP4[PERM_QP4 == "read subscribed feeds"] <- as.numeric(1)
 PERM_QP4[PERM_QP4 == "write subscribed feeds"] <- as.numeric(1)
 
-#Transform na in '0'
+#transform na in '0' in PERM_QP4
 PERM_QP4[is.na(PERM_QP4)] <- as.numeric(0) 
 
-#Delete string variable permissions
+#delete string variable permissions in PERM_QP4
 PERM_QP4$permissions <- NULL
 
-#save permissions subset as CSV
+#save permissions subset PERM_QP4 as CSV file
 write.csv(PERM_QP4, file = "PERM_QP4_FILTERED_NUMERIC.csv")
