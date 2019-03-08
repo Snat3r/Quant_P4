@@ -440,6 +440,41 @@ PERM_QP4[is.na(PERM_QP4)] <- 0
 #Delete string variable permissions
 PERM_QP4$permissions <- NULL
 
+
+#make subset with dangerous permissions
+Dang_Perm <- c("id",
+               "read_calendar_events_plus_confidential_information",
+               "add_or_modify_calendar_events_and_send_email_to_guests_without_owners_knowledge", 
+               "read_call_log", 
+               "write_call_log", 
+               "reroute_outgoing_calls", 
+               "take_pictures_and_videos", 
+               "read_your_contacts", 
+               "modify_your_contacts", 
+               "find_accounts_on_the_device", 
+               "add_or_remove_accounts", 
+               "approximate_location_network_based", 
+               "precise_location_GPS_and_network_based", 
+               "record_audio", 
+               "read_precise_phone_states", 
+               "read_phone_status_and_identity", 
+               "directly_call_phone_numbers", 
+               "directly_call_any_phone_numbers", 
+               "read_voicemail", 
+               "write_voicemail", 
+               "make_receive_SIP_calls", 
+               "body_sensors_like_heart_rate_monitors", 
+               "send_SMS_messages", 
+               "receive_text_messages_SMS", 
+               "read_your_text_messages_SMS_or_MMS", 
+               "receive_text_messages_WAP", 
+               "receive_text_messages_MMS", 
+               "read_the_contents_of_your_USB_storage", 
+               "modify_or_delete_the_contents_of_your_USB_storage"
+                )
+
+QP4_DPERM <- PERM_QP4[Dang_Perm]
+
 #merge QP4 with PERM_QP4 by ID
-QP4 <- merge(QP4, PERM_QP4, by = "id")
+QP4 <- merge(QP4, QP4_DPERM, by = "id")
 
