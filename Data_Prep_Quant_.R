@@ -89,6 +89,21 @@ QP4 = QP4 %>%
 QP4$Productivity = as.numeric(QP4$Productivity)
 QP4$Productivity[QP4$Productivity > 1] = 1
 
+#remove unwanted categories
+QP4 = subset(QP4, select = -c(
+      cat_AUTO_AND_VEHICLES,
+      cat_BEAUTY,
+      cat_COMMUNICATION,
+      cat_EDUCATION,
+      cat_EVENTS,
+      cat_HOUSE_AND_HOME,
+      cat_LIFESTYLE,
+      cat_TOOLS,
+      cat_TRAVEL_AND_LOCAL,
+      cat_VIDEO_PLAYERS,
+      cat_WEATHER,
+      category))
+
 #Distribution of rating
 rating = QP4$rating[!is.na(QP4$rating)]
 summary(rating)
