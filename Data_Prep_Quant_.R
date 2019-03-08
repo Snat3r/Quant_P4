@@ -71,6 +71,24 @@ QP4$category = as.factor(QP4$category)
 QP4 = cbind(QP4, dummy(QP4$category, sep = "_"))
 colnames(QP4) <- gsub("QP4_", "cat_", fixed = TRUE, colnames(QP4))
 
+#Combine the category of Leisure and if leisure 1 rest 0
+QP4 = QP4 %>% 
+  unite(Leisure, cat_GAME, cat_ENTERTAINMENT, cat_PHOTOGRAPHY, cat_ART_AND_DESIGN, sep = '')
+QP4$Leisure = as.numeric(QP4$Leisure)
+QP4$Leisure[QP4$Leisure > 1] = 1
+
+#Combine the category of Living and if living 1 rest 0
+QP4 = QP4 %>% 
+  unite(Living, cat_MEDICAL, cat_HEALTH_AND_FITNESS, cat_FOOD_AND_DRINK, cat_PARENTING, sep = '')
+QP4$Living = as.numeric(QP4$Living)
+QP4$Living[QP4$Living > 1] = 1
+
+#Combine the category of Productivity and if productivity 1 rest 0
+QP4 = QP4 %>% 
+  unite(Productivity, cat_BUSINESS, cat_FINANCE, cat_PRODUCTIVITY, cat_MAPS_AND_NAVIGATION, sep = '')
+QP4$Productivity = as.numeric(QP4$Productivity)
+QP4$Productivity[QP4$Productivity > 1] = 1
+
 #Distribution of rating
 rating = QP4$rating[!is.na(QP4$rating)]
 summary(rating)
