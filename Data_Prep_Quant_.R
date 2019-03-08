@@ -62,6 +62,7 @@ QP4$last_updated = as.Date(mdy(QP4$last_updated))
 #Change QP4$intalls from character to numerical value
 QP4$intalls = gsub("[[:punct:]]", "", QP4$intalls)
 QP4$intalls = as.numeric(QP4$intalls)
+QP4$rating = as.numeric(QP4$rating)
 
 #change category into a factor
 ## based on the factor create new columns with a 0 or 1
@@ -69,6 +70,18 @@ QP4$intalls = as.numeric(QP4$intalls)
 QP4$category = as.factor(QP4$category)
 QP4 = cbind(QP4, dummy(QP4$category, sep = "_"))
 colnames(QP4) <- gsub("QP4_", "cat_", fixed = TRUE, colnames(QP4))
+
+#Distribution of rating
+rating = QP4$rating[!is.na(QP4$rating)]
+summary(rating)
+sd(rating)
+hist(rating)
+
+#Distribution of performance (e.g. Intalls)
+performance = QP4$intalls[!is.na(QP4$intalls)]
+summary(performance)
+sd(performance)
+hist(performance)
 
 #Create new subset with permissions 
 Permissions <- c("permissions", "id")
