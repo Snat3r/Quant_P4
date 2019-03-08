@@ -577,3 +577,5 @@ QP4 = subset(QP4, select = -c(read_calendar_events_plus_confidential_information
                                 read_the_contents_of_your_USB_storage, 
                                 modify_or_delete_the_contents_of_your_USB_storage))
 
+#subset data for analysis
+QP4_Data = subset(QP4, select = c(dperm, Leisure, Living, Productivity, intalls, rating))
