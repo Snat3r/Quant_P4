@@ -59,6 +59,10 @@ QP4$rating[QP4$rating == 'NaN'] <- NA
 #convert last updated into date variable
 QP4$last_updated = as.Date(mdy(QP4$last_updated))
 
+#Change QP4$intalls from character to numerical value
+QP4$intalls = gsub("[[:punct:]]", "", QP4$intalls)
+QP4$intalls = as.numeric(QP4$intalls)
+
 #change category into a factor
 ## based on the factor create new columns with a 0 or 1
 ### rename the columns
