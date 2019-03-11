@@ -579,3 +579,6 @@ QP4 = subset(QP4, select = -c(read_calendar_events_plus_confidential_information
 
 #subset data for analysis
 QP4_Data = subset(QP4, select = c(dperm, Leisure, Living, Productivity, intalls, rating))
+
+#remove all temporary files from global environment
+rm('PERM_QP4', 'QP4', 'QP4_DPERM', 'QP4_m', 'Dang_Perm', 'Dang_Perm2num', 'Permissions', 'performance', 'rating')
