@@ -16,9 +16,12 @@
 library(tidyverse)
 library(car)
 library(MASS)
+library(stargazer)
+library(mvord)
 
 QP4f = QP4_Data
 QP4_Data = QP4f
+QP4_Data = subset(QP4_Data, select = -c(Living, intalls))
 
 #first count missing values in Rating / what are we going to do? remove all the rows or mean or median replacement?
 # NA == 646
@@ -47,34 +50,21 @@ QP4_Data$rating <- NA2mean(QP4_Data$rating)
 hist(QP4_Data$rating) #left skewed, median is higher then the mean
 
 ######Correlation matrix#######
-
 QP4_Data$performance = as.numeric(QP4_Data$performance)
-cor(QP4_Data)
+cor_mod = cor(QP4_Data, method = "pearson")
+
 QP4_Data$performance = as.factor(QP4_Data$performance)
 str(QP4_Data)
 
-######Building model######
-regl1 <- polr(performance ~ dperm, data = QP4_Data)
-summary(regl1)
+stargazer(QP4_Data, title = "Descriptive Statistics", type = 'text')
+stargazer(cor_mod, title="Correlation Matrix", type = "text", out = 'D://Quant_Data/correlation', style = "asq", table.layout = "-")
+?stargazer
 
-regl2 <- polr(performance ~ dperm + rating, data = QP4_Data)
-summary(regl2)
-
-regl3 <- polr(performance ~ dperm + Leisure + rating, data = QP4_Data)
-summary(regl3)
-
-regl4 <- polr(performance ~ dperm + Leisure + I(dperm*Leisure) + rating, data = QP4_Data)
-summary(regl4)
+cor.test(QP4_Data$Leisure, QP4_Data$Productivity)
+cor.test(QP4_Data$dperm, QP4_Data$Productivity)
+cor.test(QP4_Data$Productivity, QP4_Data$rating)
+cor.test(QP4_Data$rating, QP4_Data$performance)
+cor.test(QP4_Data$dperm, QP4_Data$Leisure)
 
 
-regp1 <- polr(performance ~ dperm, data = QP4_Data)
-summary(regl1)
-
-regp2 <- polr(performance ~ dperm + rating, data = QP4_Data)
-summary(regl2)
-
-regp3 <- polr(performance ~ dperm + Productivity + rating, data = QP4_Data)
-summary(regl3)
-
-regp4 <- polr(performance ~ dperm + Productivity + I(dperm*Productivity) + rating, data = QP4_Data)
-summary(regl4)
+str(QP4_Data)
