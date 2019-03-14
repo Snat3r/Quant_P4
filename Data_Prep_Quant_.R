@@ -582,3 +582,27 @@ QP4_Data = subset(QP4, select = c(dperm, Leisure, Living, Productivity, intalls,
 
 #remove all temporary files from global environment
 rm('PERM_QP4', 'QP4', 'QP4_DPERM', 'QP4_m', 'Dang_Perm', 'Dang_Perm2num', 'Permissions', 'performance', 'rating')
+
+#recoding installs to categorical values
+QP4_Data$performance[QP4_Data$intalls == 0]           <- "1"
+QP4_Data$performance[QP4_Data$intalls == 1]           <- "2"
+QP4_Data$performance[QP4_Data$intalls == 5]           <- "3"
+QP4_Data$performance[QP4_Data$intalls == 10]          <- "4"
+QP4_Data$performance[QP4_Data$intalls == 50]          <- "5"
+QP4_Data$performance[QP4_Data$intalls == 100]         <- "6"
+QP4_Data$performance[QP4_Data$intalls == 500]         <- "7"
+QP4_Data$performance[QP4_Data$intalls == 1000]        <- "8"
+QP4_Data$performance[QP4_Data$intalls == 5000]        <- "9"
+QP4_Data$performance[QP4_Data$intalls == 10000]       <- "10"
+QP4_Data$performance[QP4_Data$intalls == 50000]       <- "11"
+QP4_Data$performance[QP4_Data$intalls == 100000]      <- "12"
+QP4_Data$performance[QP4_Data$intalls == 500000]      <- "13"
+QP4_Data$performance[QP4_Data$intalls == 1000000]     <- "14"
+QP4_Data$performance[QP4_Data$intalls == 5000000]     <- "15"
+QP4_Data$performance[QP4_Data$intalls == 10000000]    <- "16"
+QP4_Data$performance[QP4_Data$intalls == 50000000]    <- "17"
+QP4_Data$performance[QP4_Data$intalls == 100000000]   <- "18"
+QP4_Data$performance[QP4_Data$intalls == 500000000]   <- "19"
+QP4_Data$performance[QP4_Data$intalls == 1000000000]  <- "20"
+
+QP4_Data$performance = as.factor(QP4_Data$performance)
