@@ -29,7 +29,6 @@ sum(is.na(QP4_Data$rating))
 sum(is.na(QP4_Data$performance))
 sum(is.na(QP4_Data$dperm))
 
-
 #Descriptive statistics for all the variables
 #Dangerous permissions count
 summary(QP4_Data$dperm)
@@ -68,3 +67,65 @@ cor.test(QP4_Data$dperm, QP4_Data$Leisure)
 
 
 str(QP4_Data)
+######Building model###### 
+#Leisure
+regl1 <- polr(performance ~ rating, data = QP4_Data)
+regl1table <- coef(summary(regl1))
+regl1p <- pnorm(abs(regl1table[, "t value"]), lower.tail = FALSE) * 2
+regl1table <- cbind(regl1table, "p value" = regl1p)
+regl1table
+summary(regl1)
+
+regl2 <- polr(performance ~ dperm, rating data = QP4_Data)
+regl2table <- coef(summary(regl2))
+regl2p <- pnorm(abs(regl2table[, "t value"]), lower.tail = FALSE) * 2
+regl2table <- cbind(regl2table, "p value" = regl2p)
+regl2table
+summary(regl2)
+
+regl3 <- polr(performance ~ dperm + Leisure + rating, data = QP4_Data)
+regl3table <- coef(summary(regl3))
+regl3p <- pnorm(abs(regl3table[, "t value"]), lower.tail = FALSE) * 2
+regl3table <- cbind(regl3table, "p value" = regl3p)
+regl3table
+
+summary(regl3)
+
+regl4 <- polr(performance ~ dperm + Leisure + I(dperm*Leisure) + rating, data = QP4_Data)
+regl4table <- coef(summary(regl4))
+regl4p <- pnorm(abs(regl4table[, "t value"]), lower.tail = FALSE) * 2
+regl4table <- cbind(regl4table, "p value" = regl4p)
+regl4table
+summary(regl4)
+
+
+#Productivity
+regp1 <- polr(performance ~ rating, data = QP4_Data)
+summary(regl1)
+
+regp2 <- polr(performance ~ dperm + rating, data = QP4_Data)
+summary(regl2)
+
+regp3 <- polr(performance ~ dperm + Productivity + rating, data = QP4_Data)
+regp3table <- coef(summary(regp3))
+regp3p <- pnorm(abs(regp3table[, "t value"]), lower.tail = FALSE) * 2
+regp3table <- cbind(regp3table, "p value" = regp3p)
+regp3table
+summary(regl3)
+
+regp4 <- polr(performance ~ dperm + Productivity + I(dperm*Productivity) + rating, data = QP4_Data)
+regp4table <- coef(summary(regp4))
+regp4p <- pnorm(abs(regp4table[, "t value"]), lower.tail = FALSE) * 2
+regp4table <- cbind(regp4table, "p value" = regp4p)
+regp4table
+
+summary(regl4)
+
+#store table
+regl1table <- coef(summary(regl1))
+
+
+#Calculate p-values
+regl1p <- pnorm(abs(regl1table[, "t value"]), lower.tail = FALSE) * 2
+regl1table <- cbind(regl1table, "p value" = regl1p)
+regl1table
