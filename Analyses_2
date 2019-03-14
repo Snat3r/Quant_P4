@@ -1,0 +1,80 @@
+#################
+#  VU AMSTERDAM #
+#               #
+#  Created By:  #
+#     Alex      #
+#    Berkout    #
+# AND           #
+#     Coen      #
+#   van der     #
+#     Geest     #
+#################                                                                                                                          
+
+#this code is free the use under the condition to attribute the original authors by refering the following:
+#Berkhout, A.T., & van der Geest, C. (2019) R Google Play Store Permissons Extractor, version 1.0, R Script, https://github.com/Snat3r/Quant_P4
+
+library(tidyverse)
+library(car)
+library(MASS)
+
+QP4f = QP4_Data
+QP4_Data = QP4f
+
+#first count missing values in Rating / what are we going to do? remove all the rows or mean or median replacement?
+# NA == 646
+sum(is.na(QP4_Data$rating))
+sum(is.na(QP4_Data$performance))
+sum(is.na(QP4_Data$dperm))
+
+
+#Descriptive statistics for all the variables
+#Dangerous permissions count
+summary(QP4_Data$dperm)
+sd(QP4_Data$dperm)
+hist(QP4_Data$dperm) #right skewed, mean is higher then the median
+
+#Performance
+summary(QP4_Data$performance)
+sd(QP4_Data$performance)
+as.numeric(QP4_Data$performance) %>% 
+hist() #right skewed, mean is higher then the median
+
+#rating
+summary(QP4_Data$rating)
+sd(QP4_Data$rating)
+NA2mean <- function(x) replace(x, is.na(x), mean(x, na.rm = TRUE))
+QP4_Data$rating <- NA2mean(QP4_Data$rating)
+hist(QP4_Data$rating) #left skewed, median is higher then the mean
+
+######Correlation matrix#######
+
+QP4_Data$performance = as.numeric(QP4_Data$performance)
+cor(QP4_Data)
+QP4_Data$performance = as.factor(QP4_Data$performance)
+str(QP4_Data)
+
+######Building model######
+regl1 <- polr(performance ~ dperm, data = QP4_Data)
+summary(regl1)
+
+regl2 <- polr(performance ~ dperm + rating, data = QP4_Data)
+summary(regl2)
+
+regl3 <- polr(performance ~ dperm + Leisure + rating, data = QP4_Data)
+summary(regl3)
+
+regl4 <- polr(performance ~ dperm + Leisure + I(dperm*Leisure) + rating, data = QP4_Data)
+summary(regl4)
+
+
+regp1 <- polr(performance ~ dperm, data = QP4_Data)
+summary(regl1)
+
+regp2 <- polr(performance ~ dperm + rating, data = QP4_Data)
+summary(regl2)
+
+regp3 <- polr(performance ~ dperm + Productivity + rating, data = QP4_Data)
+summary(regl3)
+
+regp4 <- polr(performance ~ dperm + Productivity + I(dperm*Productivity) + rating, data = QP4_Data)
+summary(regl4)
